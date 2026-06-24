@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
 
   test:
@@ -54,4 +58,4 @@ jobs:
         with:
           context: ./link-service
           push: true
-          tags: ghcr.io/dakshinab/smartlink/link-service:latest
+          tags: ghcr.io/dakshinab/link-service:latest
