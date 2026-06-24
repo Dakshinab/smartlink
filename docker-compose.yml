@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+
+  # Our Flask link service
+  link-service:
+    image: ghcr.io/dakshinab/link-service:latest
+    container_name: link-service
+    restart: always
+    environment:
+      - DATABASE_URL=sqlite:///links.db
+      - SECRET_KEY=change-this-in-production
+    ports:
+      - "5001:5001"
+    volumes:
+      - link-data:/app/data
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - certbot-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    depends_on:
+      - link-service
+
+  # Certbot for free SSL certificate
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+
+volumes:
+  link-data:
+  certbot-certs:
+  certbot-www:
