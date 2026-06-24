@@ -5,3 +5,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 *.sqlite
+
+terraform/*.tfvars
+terraform/keys/
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+.oci/
