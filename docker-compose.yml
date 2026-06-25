@@ -1,8 +1,5 @@
-version: '3.8'
-
 services:
 
-  # Our Flask link service
   link-service:
     image: ghcr.io/dakshinab/link-service:latest
     container_name: link-service
@@ -15,7 +12,6 @@ services:
     volumes:
       - link-data:/app/data
 
-  # Nginx reverse proxy
   nginx:
     image: nginx:alpine
     container_name: nginx
@@ -30,15 +26,43 @@ services:
     depends_on:
       - link-service
 
-  # Certbot for free SSL certificate
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
+    ports:
+      - "9090:9090"
     volumes:
-      - certbot-certs:/etc/letsencrypt
-      - certbot-www:/var/www/certbot
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.retention.time=15d'
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=smartlink123
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: always
+    ports:
+      - "9100:9100"
 
 volumes:
   link-data:
   certbot-certs:
   certbot-www:
+  prometheus-data:
+  grafana-data:
