@@ -4,17 +4,14 @@ global:
 
 scrape_configs:
 
-  # Monitor our Flask app
   - job_name: 'link-service'
     static_configs:
       - targets: ['link-service:5001']
 
-  # Monitor the server itself (CPU, RAM, disk)
   - job_name: 'node-exporter'
     static_configs:
       - targets: ['node-exporter:9100']
 
-  # Monitor Prometheus itself
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
