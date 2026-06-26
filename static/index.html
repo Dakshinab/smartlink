@@ -16,9 +16,9 @@
     --yellow-dark: #d4a900;
     --yellow-glow: rgba(245, 197, 24, 0.15);
     --yellow-glow-strong: rgba(245, 197, 24, 0.3);
-    --text-primary: #ffffff;
-    --text-secondary: #8892a4;
-    --text-muted: #4a5568;
+    --text-primary: #e8eaf0;
+    --text-secondary: #9aa3b4;
+    --text-muted: #5a6478;
     --border: rgba(245, 197, 24, 0.1);
     --border-hover: rgba(245, 197, 24, 0.3);
     --success: #00d4aa;
@@ -33,7 +33,6 @@
     overflow-x: hidden;
   }
 
-  /* Animated background */
   body::before {
     content: '';
     position: fixed;
@@ -53,7 +52,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 32px;
-    background: rgba(15, 22, 40, 0.8);
+    background: rgba(15, 22, 40, 0.9);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     position: sticky;
@@ -85,17 +84,27 @@
     box-shadow: 0 0 20px var(--yellow-glow-strong);
   }
 
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
   .nav-status {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 13px;
     color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
   }
 
   .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--success);
     box-shadow: 0 0 8px var(--success);
@@ -107,7 +116,7 @@
     50% { opacity: 0.4; }
   }
 
-  /* MAIN LAYOUT */
+  /* MAIN */
   .main {
     max-width: 1400px;
     margin: 0 auto;
@@ -116,7 +125,7 @@
     z-index: 1;
   }
 
-  /* STATS ROW */
+  /* STATS */
   .stats-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -128,18 +137,16 @@
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 20px 24px;
+    padding: 24px;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
   }
 
-  .stat-card::before {
+  .stat-card::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--yellow), transparent);
     opacity: 0;
@@ -153,18 +160,46 @@
     box-shadow: 0 8px 32px var(--yellow-glow);
   }
 
-  .stat-card:hover::before { opacity: 1; }
+  .stat-card:hover::after { opacity: 1; }
+
+  .stat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
 
   .stat-label {
     font-size: 12px;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .stat-icon-box {
+    width: 32px;
+    height: 32px;
+    background: var(--yellow-glow);
+    border: 1px solid var(--border-hover);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-icon-box svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--yellow);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .stat-value {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
     color: var(--yellow);
     line-height: 1;
@@ -177,14 +212,6 @@
     color: var(--text-muted);
   }
 
-  .stat-icon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 28px;
-    opacity: 0.15;
-  }
-
   /* CONTENT GRID */
   .content-grid {
     display: grid;
@@ -193,7 +220,7 @@
     margin-bottom: 24px;
   }
 
-  /* SHORTEN CARD */
+  /* CARDS */
   .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -204,14 +231,20 @@
 
   .card:hover { border-color: var(--border-hover); }
 
-  .card-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 6px;
+  }
+
+  .card-title {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
   }
 
   .card-title-icon {
@@ -223,7 +256,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+  }
+
+  .card-title-icon svg {
+    width: 15px;
+    height: 15px;
+    stroke: var(--yellow);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .card-subtitle {
@@ -233,9 +275,8 @@
     padding-left: 42px;
   }
 
-  .input-group {
-    margin-bottom: 16px;
-  }
+  /* INPUTS */
+  .input-group { margin-bottom: 16px; }
 
   .input-label {
     font-size: 12px;
@@ -244,35 +285,34 @@
     display: block;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
   }
 
-  .input-wrapper {
-    position: relative;
-  }
-
-  .input-wrapper input {
+  input[type="url"],
+  input[type="text"] {
     width: 100%;
     background: var(--bg-secondary);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(245, 197, 24, 0.12);
     border-radius: 12px;
-    padding: 14px 16px;
+    padding: 13px 16px;
     color: var(--text-primary);
     font-size: 14px;
     outline: none;
     transition: all 0.3s;
   }
 
-  .input-wrapper input:focus {
+  input[type="url"]:focus,
+  input[type="text"]:focus {
     border-color: var(--yellow);
     box-shadow: 0 0 0 3px var(--yellow-glow);
     background: var(--bg-card-hover);
   }
 
-  .input-wrapper input::placeholder { color: var(--text-muted); }
+  input::placeholder { color: var(--text-muted); }
 
   .btn-shorten {
     width: 100%;
-    padding: 16px;
+    padding: 15px;
     background: var(--yellow);
     color: var(--bg-primary);
     border: none;
@@ -281,7 +321,7 @@
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     margin-top: 8px;
     box-shadow: 0 4px 20px var(--yellow-glow-strong);
   }
@@ -293,19 +333,14 @@
   }
 
   .btn-shorten:active { transform: translateY(0); }
+  .btn-shorten:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-  .btn-shorten:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  /* RESULT BOX */
+  /* RESULT */
   .result-box {
     display: none;
     margin-top: 16px;
     background: var(--bg-secondary);
-    border: 1px solid rgba(0, 212, 170, 0.3);
+    border: 1px solid rgba(0, 212, 170, 0.25);
     border-radius: 12px;
     padding: 16px;
   }
@@ -313,7 +348,7 @@
   .result-box.show { display: block; animation: slideIn 0.3s ease; }
 
   @keyframes slideIn {
-    from { opacity: 0; transform: translateY(-10px); }
+    from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
@@ -322,7 +357,8 @@
     color: var(--success);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-weight: 600;
   }
 
   .result-url {
@@ -333,7 +369,7 @@
 
   .result-url a {
     color: var(--yellow);
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     flex: 1;
@@ -359,27 +395,27 @@
 
   .btn-copy:hover { background: var(--yellow); color: var(--bg-primary); }
 
-  /* RECENT ACTIVITY */
+  /* ACTIVITY */
   .activity-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     max-height: 320px;
     overflow-y: auto;
   }
 
-  .activity-list::-webkit-scrollbar { width: 4px; }
+  .activity-list::-webkit-scrollbar { width: 3px; }
   .activity-list::-webkit-scrollbar-track { background: transparent; }
   .activity-list::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 2px; }
 
   .activity-item {
     background: var(--bg-secondary);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(245, 197, 24, 0.07);
     border-radius: 12px;
-    padding: 14px 16px;
+    padding: 13px 16px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     transition: all 0.2s;
     cursor: pointer;
   }
@@ -387,12 +423,12 @@
   .activity-item:hover {
     border-color: var(--border-hover);
     background: var(--bg-card-hover);
-    transform: translateX(4px);
+    transform: translateX(3px);
   }
 
   .activity-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--yellow);
     box-shadow: 0 0 8px var(--yellow-glow-strong);
@@ -425,7 +461,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 4px;
+    gap: 3px;
     flex-shrink: 0;
   }
 
@@ -435,38 +471,15 @@
     color: var(--yellow);
   }
 
-  .activity-date {
-    font-size: 10px;
-    color: var(--text-muted);
-  }
+  .activity-date { font-size: 10px; color: var(--text-muted); }
 
-  .btn-delete {
-    padding: 6px 10px;
-    background: transparent;
-    border: 1px solid rgba(255, 71, 87, 0.3);
-    border-radius: 6px;
-    color: var(--danger);
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex-shrink: 0;
-  }
-
-  .btn-delete:hover { background: rgba(255, 71, 87, 0.1); border-color: var(--danger); }
-
-  /* FULL LINKS TABLE */
+  /* TABLE */
   .links-card { grid-column: 1 / -1; }
-
   .table-wrapper { overflow-x: auto; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
+  table { width: 100%; border-collapse: collapse; }
 
-  thead tr {
-    border-bottom: 1px solid var(--border);
-  }
+  thead tr { border-bottom: 1px solid rgba(245, 197, 24, 0.1); }
 
   th {
     padding: 12px 16px;
@@ -479,30 +492,26 @@
   }
 
   tbody tr {
-    border-bottom: 1px solid rgba(245, 197, 24, 0.05);
+    border-bottom: 1px solid rgba(245, 197, 24, 0.04);
     transition: background 0.2s;
   }
 
   tbody tr:hover { background: var(--bg-card-hover); }
 
-  td {
-    padding: 14px 16px;
-    font-size: 13px;
-    color: var(--text-primary);
-  }
+  td { padding: 14px 16px; font-size: 13px; color: var(--text-primary); }
 
   .td-short a {
     color: var(--yellow);
     text-decoration: none;
     font-weight: 600;
-    font-family: monospace;
-    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
   }
 
   .td-short a:hover { text-decoration: underline; }
 
   .td-original {
-    max-width: 250px;
+    max-width: 240px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -513,11 +522,11 @@
   .clicks-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     background: var(--yellow-glow);
     border: 1px solid var(--border-hover);
     color: var(--yellow);
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
@@ -526,7 +535,7 @@
   .status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 11px;
@@ -534,15 +543,15 @@
   }
 
   .status-active {
-    background: rgba(0, 212, 170, 0.1);
+    background: rgba(0, 212, 170, 0.08);
     color: var(--success);
     border: 1px solid rgba(0, 212, 170, 0.2);
   }
 
   .status-inactive {
-    background: rgba(74, 85, 104, 0.2);
+    background: rgba(74, 85, 104, 0.15);
     color: var(--text-muted);
-    border: 1px solid rgba(74, 85, 104, 0.3);
+    border: 1px solid rgba(74, 85, 104, 0.25);
   }
 
   .td-actions { display: flex; gap: 8px; }
@@ -567,38 +576,46 @@
 
   .btn-del-sm {
     background: transparent;
-    border-color: rgba(255, 71, 87, 0.3);
+    border-color: rgba(255, 71, 87, 0.25);
     color: var(--danger);
   }
 
   .btn-del-sm:hover { background: rgba(255, 71, 87, 0.1); border-color: var(--danger); }
 
-  /* EMPTY STATE */
+  /* EMPTY */
   .empty-state {
     text-align: center;
     padding: 48px 24px;
     color: var(--text-muted);
   }
 
-  .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
-  .empty-text { font-size: 14px; }
-
-  /* LOADING */
-  .loading {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: center;
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    opacity: 0.2;
   }
 
+  .empty-icon svg {
+    width: 48px;
+    height: 48px;
+    stroke: var(--text-secondary);
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .empty-text { font-size: 14px; color: var(--text-muted); }
+
+  /* LOADING */
+  .loading { display: flex; gap: 6px; align-items: center; justify-content: center; }
   .loading span {
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--bg-primary);
     animation: bounce 0.6s infinite alternate;
   }
-
   .loading span:nth-child(2) { animation-delay: 0.2s; }
   .loading span:nth-child(3) { animation-delay: 0.4s; }
 
@@ -622,7 +639,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     transform: translateY(100px);
     opacity: 0;
     transition: all 0.3s ease;
@@ -632,16 +649,8 @@
   .toast.success { border-color: rgba(0, 212, 170, 0.4); }
   .toast.error { border-color: rgba(255, 71, 87, 0.4); }
 
-  /* SECTION HEADER */
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-
   .btn-refresh {
-    padding: 8px 16px;
+    padding: 7px 14px;
     background: var(--yellow-glow);
     border: 1px solid var(--border-hover);
     border-radius: 8px;
@@ -654,26 +663,6 @@
 
   .btn-refresh:hover { background: var(--yellow); color: var(--bg-primary); }
 
-  /* SERVER INFO */
-  .server-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 6px 14px;
-  }
-
-  .server-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--success);
-  }
-
   @media (max-width: 900px) {
     .stats-row { grid-template-columns: repeat(2, 1fr); }
     .content-grid { grid-template-columns: 1fr; }
@@ -684,15 +673,14 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <div class="logo">
     <div class="logo-icon">S</div>
     SmartLink
   </div>
-  <div style="display:flex; gap:16px; align-items:center;">
-    <div class="server-badge">
-      <div class="server-dot"></div>
+  <div class="nav-right">
+    <div class="nav-status">
+      <div class="status-dot"></div>
       Singapore · Oracle Cloud
     </div>
     <div class="nav-status">
@@ -702,67 +690,80 @@
   </div>
 </nav>
 
-<!-- MAIN -->
 <main class="main">
 
   <!-- STATS -->
   <div class="stats-row">
     <div class="stat-card">
-      <div class="stat-label">Total Links</div>
+      <div class="stat-header">
+        <div class="stat-label">Total Links</div>
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+      </div>
       <div class="stat-value" id="stat-total">—</div>
       <div class="stat-sub">All time created</div>
-      <div class="stat-icon">🔗</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Total Clicks</div>
+      <div class="stat-header">
+        <div class="stat-label">Total Clicks</div>
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+      </div>
       <div class="stat-value" id="stat-clicks">—</div>
       <div class="stat-sub">Across all links</div>
-      <div class="stat-icon">👆</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Active Links</div>
+      <div class="stat-header">
+        <div class="stat-label">Active Links</div>
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+      </div>
       <div class="stat-value" id="stat-active">—</div>
       <div class="stat-sub">Currently live</div>
-      <div class="stat-icon">✅</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Top Clicks</div>
+      <div class="stat-header">
+        <div class="stat-label">Top Clicks</div>
+        <div class="stat-icon-box">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+      </div>
       <div class="stat-value" id="stat-top">—</div>
       <div class="stat-sub">Single link record</div>
-      <div class="stat-icon">🏆</div>
     </div>
   </div>
 
   <!-- CONTENT GRID -->
   <div class="content-grid">
 
-    <!-- SHORTEN CARD -->
+    <!-- SHORTEN -->
     <div class="card">
-      <div class="card-title">
-        <div class="card-title-icon">⚡</div>
-        Shorten a URL
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          Shorten a URL
+        </div>
       </div>
       <div class="card-subtitle">Paste your long URL and get a short link instantly</div>
 
       <div class="input-group">
         <label class="input-label">Long URL</label>
-        <div class="input-wrapper">
-          <input type="url" id="input-url" placeholder="https://your-very-long-url.com/goes/here" />
-        </div>
+        <input type="url" id="input-url" placeholder="https://your-very-long-url.com/goes/here" />
       </div>
 
       <div class="input-group">
         <label class="input-label">Custom Slug (optional)</label>
-        <div class="input-wrapper">
-          <input type="text" id="input-slug" placeholder="my-custom-link" />
-        </div>
+        <input type="text" id="input-slug" placeholder="my-custom-link" />
       </div>
 
       <div class="input-group">
         <label class="input-label">Title (optional)</label>
-        <div class="input-wrapper">
-          <input type="text" id="input-title" placeholder="My awesome link" />
-        </div>
+        <input type="text" id="input-title" placeholder="My awesome link" />
       </div>
 
       <button class="btn-shorten" id="btn-shorten" onclick="shortenUrl()">
@@ -770,7 +771,7 @@
       </button>
 
       <div class="result-box" id="result-box">
-        <div class="result-label">✓ Link created successfully</div>
+        <div class="result-label">Link created successfully</div>
         <div class="result-url">
           <a href="#" id="result-link" target="_blank"></a>
           <button class="btn-copy" onclick="copyResult()">Copy</button>
@@ -778,28 +779,35 @@
       </div>
     </div>
 
-    <!-- RECENT ACTIVITY -->
+    <!-- ACTIVITY -->
     <div class="card">
-      <div class="section-header">
+      <div class="card-header">
         <div class="card-title">
-          <div class="card-title-icon">📊</div>
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
           Recent Activity
         </div>
         <button class="btn-refresh" onclick="loadLinks()">Refresh</button>
       </div>
+      <div class="card-subtitle" style="margin-bottom:16px">Your latest shortened links</div>
       <div class="activity-list" id="activity-list">
         <div class="empty-state">
-          <div class="empty-icon">🔗</div>
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
           <div class="empty-text">No links yet. Create your first one!</div>
         </div>
       </div>
     </div>
 
-    <!-- ALL LINKS TABLE -->
+    <!-- TABLE -->
     <div class="card links-card">
-      <div class="section-header">
+      <div class="card-header" style="margin-bottom:20px">
         <div class="card-title">
-          <div class="card-title-icon">📋</div>
+          <div class="card-title-icon">
+            <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
           All Links
         </div>
         <span style="font-size:12px; color:var(--text-muted)" id="links-count"></span>
@@ -819,14 +827,14 @@
             </tr>
           </thead>
           <tbody id="links-table">
-            <tr>
-              <td colspan="8">
-                <div class="empty-state">
-                  <div class="empty-icon">🔗</div>
-                  <div class="empty-text">No links yet</div>
+            <tr><td colspan="8">
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                 </div>
-              </td>
-            </tr>
+                <div class="empty-text">No links yet</div>
+              </div>
+            </td></tr>
           </tbody>
         </table>
       </div>
@@ -835,34 +843,27 @@
   </div>
 </main>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
   const API = 'http://161.118.245.201';
   let allLinks = [];
 
-  // Show toast notification
   function showToast(msg, type = 'success') {
     const t = document.getElementById('toast');
-    t.className = `toast ${type}`;
-    t.innerHTML = type === 'success' ? '✓ ' + msg : '✕ ' + msg;
-    t.classList.add('show');
+    t.className = `toast ${type} show`;
+    t.textContent = msg;
     setTimeout(() => t.classList.remove('show'), 3000);
   }
 
-  // Format date
   function formatDate(iso) {
-    const d = new Date(iso);
-    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    return new Date(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
   }
 
-  // Truncate URL
   function truncate(str, n) {
     return str.length > n ? str.slice(0, n) + '...' : str;
   }
 
-  // Load all links
   async function loadLinks() {
     try {
       const res = await fetch(`${API}/links?per_page=100`);
@@ -876,95 +877,80 @@
     }
   }
 
-  // Update stats cards
   function updateStats() {
     const total = allLinks.length;
     const active = allLinks.filter(l => l.is_active).length;
-    const totalClicks = allLinks.reduce((sum, l) => sum + l.click_count, 0);
-    const topClicks = allLinks.length ? Math.max(...allLinks.map(l => l.click_count)) : 0;
-
+    const totalClicks = allLinks.reduce((s, l) => s + l.click_count, 0);
+    const top = allLinks.length ? Math.max(...allLinks.map(l => l.click_count)) : 0;
     document.getElementById('stat-total').textContent = total;
     document.getElementById('stat-clicks').textContent = totalClicks;
     document.getElementById('stat-active').textContent = active;
-    document.getElementById('stat-top').textContent = topClicks;
+    document.getElementById('stat-top').textContent = top;
     document.getElementById('links-count').textContent = `${total} links total`;
   }
 
-  // Render activity list
   function renderActivity() {
     const list = document.getElementById('activity-list');
     if (!allLinks.length) {
-      list.innerHTML = `<div class="empty-state"><div class="empty-icon">🔗</div><div class="empty-text">No links yet. Create your first one!</div></div>`;
+      list.innerHTML = `<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><div class="empty-text">No links yet. Create your first one!</div></div>`;
       return;
     }
     const recent = [...allLinks].sort((a,b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 8);
-    list.innerHTML = recent.map(link => `
-      <div class="activity-item" onclick="copyToClipboard('${API}/${link.short_code}')">
-        <div class="activity-dot ${link.is_active ? '' : 'inactive'}"></div>
+    list.innerHTML = recent.map(l => `
+      <div class="activity-item" onclick="copyToClipboard('${API}/${l.short_code}')">
+        <div class="activity-dot ${l.is_active ? '' : 'inactive'}"></div>
         <div class="activity-info">
-          <div class="activity-title">${link.title || link.short_code}</div>
-          <div class="activity-url">${truncate(link.original_url, 45)}</div>
+          <div class="activity-title">${l.title || l.short_code}</div>
+          <div class="activity-url">${truncate(l.original_url, 45)}</div>
         </div>
         <div class="activity-meta">
-          <div class="activity-clicks">${link.click_count} clicks</div>
-          <div class="activity-date">${formatDate(link.created_at)}</div>
+          <div class="activity-clicks">${l.click_count} clicks</div>
+          <div class="activity-date">${formatDate(l.created_at)}</div>
         </div>
-      </div>
-    `).join('');
+      </div>`).join('');
   }
 
-  // Render table
   function renderTable() {
     const tbody = document.getElementById('links-table');
     if (!allLinks.length) {
-      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon">🔗</div><div class="empty-text">No links yet</div></div></td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><div class="empty-text">No links yet</div></div></td></tr>`;
       return;
     }
-    tbody.innerHTML = allLinks.map((link, i) => `
+    tbody.innerHTML = allLinks.map((l, i) => `
       <tr>
-        <td style="color:var(--text-muted)">${i + 1}</td>
-        <td class="td-short"><a href="${API}/${link.short_code}" target="_blank">/${link.short_code}</a></td>
-        <td class="td-original" title="${link.original_url}">${truncate(link.original_url, 40)}</td>
-        <td style="color:var(--text-secondary); font-size:12px">${link.title || '—'}</td>
-        <td><span class="clicks-badge">👆 ${link.click_count}</span></td>
-        <td><span class="status-badge ${link.is_active ? 'status-active' : 'status-inactive'}">${link.is_active ? '● Active' : '● Inactive'}</span></td>
-        <td style="color:var(--text-muted); font-size:12px">${formatDate(link.created_at)}</td>
-        <td>
-          <div class="td-actions">
-            <button class="btn-action btn-copy-sm" onclick="copyToClipboard('${API}/${link.short_code}')">Copy</button>
-            <button class="btn-action btn-del-sm" onclick="deleteLink(${link.id})">Delete</button>
-          </div>
-        </td>
-      </tr>
-    `).join('');
+        <td style="color:var(--text-muted)">${i+1}</td>
+        <td class="td-short"><a href="${API}/${l.short_code}" target="_blank">/${l.short_code}</a></td>
+        <td class="td-original" title="${l.original_url}">${truncate(l.original_url, 40)}</td>
+        <td style="color:var(--text-secondary);font-size:12px">${l.title || '—'}</td>
+        <td><span class="clicks-badge">${l.click_count}</span></td>
+        <td><span class="status-badge ${l.is_active ? 'status-active' : 'status-inactive'}">${l.is_active ? 'Active' : 'Inactive'}</span></td>
+        <td style="color:var(--text-muted);font-size:12px">${formatDate(l.created_at)}</td>
+        <td><div class="td-actions">
+          <button class="btn-action btn-copy-sm" onclick="copyToClipboard('${API}/${l.short_code}')">Copy</button>
+          <button class="btn-action btn-del-sm" onclick="deleteLink(${l.id})">Delete</button>
+        </div></td>
+      </tr>`).join('');
   }
 
-  // Shorten URL
   async function shortenUrl() {
     const url = document.getElementById('input-url').value.trim();
     const slug = document.getElementById('input-slug').value.trim();
     const title = document.getElementById('input-title').value.trim();
     const btn = document.getElementById('btn-shorten');
-
     if (!url) { showToast('Please enter a URL', 'error'); return; }
     if (!url.startsWith('http')) { showToast('URL must start with http:// or https://', 'error'); return; }
-
     btn.disabled = true;
     btn.innerHTML = '<div class="loading"><span></span><span></span><span></span></div>';
-
     try {
       const body = { original_url: url };
       if (slug) body.custom_slug = slug;
       if (title) body.title = title;
-
       const res = await fetch(`${API}/links`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
-
       const data = await res.json();
-
       if (res.status === 201) {
         const shortUrl = `${API}/${data.short_code}`;
         document.getElementById('result-link').href = shortUrl;
@@ -978,46 +964,33 @@
       } else {
         showToast(data.error || 'Something went wrong', 'error');
       }
-    } catch(e) {
-      showToast('Could not connect to server', 'error');
-    }
-
+    } catch(e) { showToast('Could not connect to server', 'error'); }
     btn.disabled = false;
     btn.textContent = 'Shorten URL';
   }
 
-  // Delete link
   async function deleteLink(id) {
     if (!confirm('Deactivate this link?')) return;
     try {
       await fetch(`${API}/links/${id}`, { method: 'DELETE' });
       showToast('Link deactivated');
       loadLinks();
-    } catch(e) {
-      showToast('Failed to delete', 'error');
-    }
+    } catch(e) { showToast('Failed to delete', 'error'); }
   }
 
-  // Copy to clipboard
   function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard!'));
   }
 
-  // Copy result
   function copyResult() {
-    const link = document.getElementById('result-link').textContent;
-    copyToClipboard(link);
+    copyToClipboard(document.getElementById('result-link').textContent);
   }
 
-  // Enter key on URL input
   document.getElementById('input-url').addEventListener('keydown', e => {
     if (e.key === 'Enter') shortenUrl();
   });
 
-  // Load on start
   loadLinks();
-
-  // Auto refresh every 30 seconds
   setInterval(loadLinks, 30000);
 </script>
 </body>
